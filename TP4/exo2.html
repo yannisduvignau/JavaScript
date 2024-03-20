@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma première découverte</title>
+    <style>
+        #map {
+            width: 400px;
+            height: 400px;
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ma première découverte</h1>
+    <div id="map"></div>
+    <button onclick="montrerFrance()">Montrez France</button>
+
+    <script>
+        var carte; // Déclaration de la variable carte en dehors de la fonction pour qu'elle soit accessible globalement
+
+        function maCarte() {
+            var mesOptions = {
+                center: new google.maps.LatLng(46.603354, 1.888334), // Centre de la France métropolitaine
+                zoom: 6, // Zoom pour afficher la France entière
+                mapTypeId: google.maps.MapTypeId.HYBRID
+            };
+            carte = new google.maps.Map(document.getElementById("map"), mesOptions);
+        }
+
+        function montrerFrance() {
+            var bounds = new google.maps.LatLngBounds();
+            bounds.extend(new google.maps.LatLng(41.5, -5.0)); // Sud-ouest de la France
+            bounds.extend(new google.maps.LatLng(51.5, 9.5)); // Nord-est de la France
+            carte.fitBounds(bounds); // Ajuster la carte pour afficher la France métropolitaine
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=Cle&callback=maCarte"></script>
+</body>
+</html>

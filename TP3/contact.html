@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <script>
+        // Vérifier si JavaScript est activé
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Vérifier si JavaScript est activé
+            document.getElementById("javascript-check").textContent = "JavaScript est activé.";
+            
+            // 2. Vérifier si l'utilisateur est un robot
+            var essais = 0;
+            var randomNumber = Math.floor(Math.random() * 10);
+            function verifierRobot() {
+                var saisie = parseInt(prompt("Entrez un nombre entre 0 et 10:"));
+                if (saisie === randomNumber) {
+                    alert("Bravo ! Vous n'êtes pas un robot.");
+                } else {
+                    essais++;
+                    if (essais < 10) {
+                        if (saisie > randomNumber) {
+                            alert("Trop grand.");
+                        } else {
+                            alert("Trop petit.");
+                        }
+                        verifierRobot(); // Demander une nouvelle saisie
+                    } else {
+                        alert("Vous semblez être un robot. Redirection vers la page précédente.");
+                        history.back(); // Retourner à la page précédente
+                    }
+                }
+            }
+            verifierRobot();
+
+            // 3. Vérifier si le navigateur est Chrome
+            if (navigator.userAgent.indexOf("Chrome") === -1) {
+                alert("Veuillez utiliser Google Chrome pour une meilleure expérience.");
+            }
+
+            // 4. Vérifier si la langue du navigateur est le français
+            if (navigator.language !== "fr") {
+                alert("Veuillez utiliser la langue française pour accéder à cette page.");
+                //history.back(); // Retourner à la page précédente
+            }
+        });
+
+        // Fonction de validation du formulaire
+        function validerFormulaire() {
+            // 1. Vérifier que les attributs obligatoires sont saisis
+            var inputsObligatoires = document.querySelectorAll('[required]');
+            var formulaireValide = true;
+            inputsObligatoires.forEach(function(input) {
+                if (!input.value.trim()) {
+                    input.style.borderColor = "red";
+                    formulaireValide = false;
+                } else {
+                    input.style.borderColor = ""; // Réinitialiser la couleur de bordure
+                }
+            });
+
+            // 2. Vérifier le format de l'email
+            var email = document.getElementById("email").value;
+            var regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!regexEmail.test(email)) {
+                document.getElementById("email").style.borderColor = "red";
+                formulaireValide = false;
+            }
+
+            // 3. Vérifier que le code de vérification correspond au numéro aléatoire
+            var verification = document.getElementById("verification").value;
+            var nbAlea = document.getElementById("randomNumber").textContent;
+            console.log(nbAlea);
+            if (verification != nbAlea) {
+                alert("Le code de vérification est incorrect.");
+                document.getElementById("verification").value = ""; // Effacer la saisie
+                document.getElementById("verification").focus; // Mettre le focus sur la zone de vérification
+                formulaireValide = false;
+            }
+
+            // Si le formulaire est valide, afficher un message de confirmation
+            if (formulaireValide) {
+                var nom = document.getElementById("name").value;
+                var categorie = document.getElementById("category").value;
+                alert("Formulaire envoyé avec succès !\nNom: " + nom + "\nCatégorie: " + categorie);
+            }
+        }
+    </script>
+</head>
+<body>
+    <noscript>
+        <h1>JAVASCRIPT PAS ACTIVE</h1>
+    </noscript>
+    <h1>Contactez l'auteur du site</h1>
+    <form id="contactForm" onsubmit="return false;">
+        <div>
+            <label for="name">Nom :</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="subject">Sujet :</label>
+            <input type="text" id="subject" name="subject" required>
+        </div>
+        <div>
+            <label for="category">Catégorie :</label>
+            <select id="category" name="category" onchange="ajouterCategorieAutre()">
+                <option value="Smart Building">Smart Building</option>
+                <option value="Energy Management">Energy Management</option>
+                <option value="Ontology">Ontology</option>
+                <option value="Micro Grid">Micro Grid</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div>
+            <label for="message">Message :</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+        <div>
+            <label for="verification">Vérification :</label>
+            <input type="text" id="verification" name="verification" required>
+        </div>
+        <div>
+            <label for="randomNumber">Numéro aléatoire :</label>
+            <span id="randomNumber"></span>
+        </div>
+        <button onclick="validerFormulaire()" type="button">Envoyer</button>
+    </form>
+    <p id="javascript-check"></p>
+
+    <script>
+        // Générer un numéro aléatoire entre 0 et 9999
+        var randomNum = Math.floor(Math.random() * 10000);
+        document.getElementById("randomNumber").textContent = randomNum;
+    </script>
+</body>
+</html>

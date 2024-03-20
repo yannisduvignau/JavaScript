@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choix de la couleur de fond</title>
+</head>
+<body>
+    <label for="choixCouleur">Choisissez une couleur de fond :</label>
+    <select id="choixCouleur" onchange="changerCouleurFond()">
+        <option value="#FFFFFF">--</option>
+        <option value="#C0C0C0">Gris</option>
+        <option value="#669999">Bleu</option>
+        <option value="#99FF66">Vert</option>
+    </select>
+
+    <script>
+        // Fonction pour changer la couleur de fond en fonction du choix de l'utilisateur
+        function changerCouleurFond() {
+            var couleurFond = document.getElementById("choixCouleur").value;
+            document.body.style.backgroundColor = couleurFond;
+        }
+    </script>
+</body>
+</html>

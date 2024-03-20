@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carousel d'images</title>
+<style>
+  .carousel {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    align-items: center;
+  }
+  .carousel img {
+    display: block;
+    width: 60%;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+  }
+</style>
+</head>
+<body>
+
+<div class="carousel">
+  <img src="img/image1.jpg" alt="Image 1">
+  <img src="img/image2.jpg" alt="Image 2">
+  <img src="img/image3.jpg" alt="Image 3">
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const carousel = document.querySelector('.carousel');
+    const images = carousel.querySelectorAll('img');
+    let currentImageIndex = 0;
+
+    function showImage(index) {
+      // Affiche l'image à l'index spécifié
+      images.forEach((image, i) => {
+        image.style.transform = `translateX(-${index * 100}%)`; // décalage horizontal
+      });
+      currentImageIndex = index;
+    }
+
+    function nextImage() {
+      // Affiche l'image suivante
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      showImage(currentImageIndex);
+    }
+
+    setInterval(nextImage, 20000); // Défile automatiquement toutes les 3 secondes
+
+    // Événement de clic sur l'image pour passer à l'image suivante
+    carousel.addEventListener('click', nextImage);
+
+    // Empêche le défilement de la page lors du défilement horizontal sur l'image
+    carousel.addEventListener('scroll', function(event) {
+      event.preventDefault();
+      carousel.scroll = 0;
+    }, { passive: false });
+  });
+</script>
+
+</body>
+</html>

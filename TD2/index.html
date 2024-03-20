@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /* Exercice 1 */
+        var a=3;
+        var b=2;
+
+        /* Exercice 2 */
+        function multiplie(y,x=8){
+            return x*y; 
+        }
+
+        /* Exercice 3 */
+        function affiche() {
+            alert(multiplie(b));
+        }
+
+        /* Exercice 4 */
+        let tab = [10000,-2,2,1,4];
+
+        /* Exercice 5 */
+        function multiplie2(x) {
+            res = [];
+            tab.forEach(element => {
+                res.push(element*x);
+            });
+            return res.join(" ; ");
+        }
+
+        /* Exercice 6 */
+        function affiche2(){
+            res = [];
+            tab.forEach(element => {
+                res.push(multiplie(a,element));
+                res.push(multiplie(b,element));
+            });
+            alert(res.join(" ; "));
+        }
+
+        /* Exercice 7 */
+        function compareNumbers(a, b) {
+            return a - b;
+        }
+
+        function tri(tableau) {
+            tableau.sort(compareNumbers);
+            alert(tableau.join(" ; "));
+        }
+
+    </script>
+</head>
+<body>
+    
+    <h1>Ecriture d'une fonction</h1>
+
+    <p>Cliquez sur le bouton pour lancer la fonction&nbsp;: <button type="button" onclick="affiche()" >Lancer la fonction</button></p>
+    <p>Cliquez sur le bouton pour lancer la fonction 2&nbsp;: <button type="button" ondblclick="affiche2()">Lancer la fonction 2</button></p>
+    <p>Cliquez sur le bouton pour lancer la fonction 3&nbsp;: <button type="button" onmouseover="tri(tab)">Lancer la fonction 3</button></p>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Révision des tables de multiplication</title>
+</head>
+<body>
+    <h1>Révision des tables de multiplication</h1>
+    <div id="questions"></div>
+    <button onclick="verifierReponses()">Faire révision</button><br><br>
+    <a href="TP2_js.html"><button>Revenir a page TP2</button></a>
+
+    <hr>
+
+    <form action="">
+        <label for="ope1" class="ope"></label>
+        <input type="text" name="ope1" placeholder="ope1" id="ope1">
+        <p class="correction"></p>
+        <label for="ope2" class="ope"></label>
+        <input type="text" name="ope2" placeholder="ope2" id="ope2">
+        <p class="correction"></p>
+        <label for="ope3" class="ope"></label>
+        <input type="text" name="ope3" placeholder="ope3" id="ope3">
+        <p class="correction"></p>
+        <button type="button" onclick="verif_calcul()">VERIFIER</button>
+    </form>
+
+
+    <script>
+        // Fonction pour générer une question de multiplication aléatoire
+        function genererQuestion() {
+            var facteur1 = Math.floor(Math.random() * 10) + 1; // Générer un nombre aléatoire entre 1 et 10
+            var facteur2 = Math.floor(Math.random() * 10) + 1;
+            return { facteur1: facteur1, facteur2: facteur2, produit: facteur1 * facteur2 };
+        }
+
+        // Générer plusieurs questions
+        var questions = [];
+        for (var i = 0; i < 5; i++) { // Générer 5 questions
+            questions.push(genererQuestion());
+        }
+
+        // Fonction pour vérifier les réponses
+        function verifierReponses() {
+            var resultats = [];
+            questions.forEach(function(question, index) {
+                var reponse = prompt("Combien font " + question.facteur1 + " x " + question.facteur2 + " ?");
+                var reponseNumerique = parseInt(reponse);
+                if (reponseNumerique === question.produit) {
+                    resultats.push("Question " + (index + 1) + ": Bonne réponse !");
+                } else {
+                    resultats.push("Question " + (index + 1) + ": Désolé, la réponse correcte était " + question.produit);
+                }
+            });
+            alert(resultats.join("\n"));
+        }
+
+        //---------------------------------------------
+
+        function int_alea(){
+            var facteur = Math.floor(Math.random() * 10) + 1;
+            return facteur;
+        }
+
+        function afficher_operations(){
+            ope = document.getElementsByClassName("ope")[0];
+            ope.innerHTML = int_alea() + " * " + int_alea();
+            ope = document.getElementsByClassName("ope")[1];
+            ope.innerHTML = int_alea() + " * " + int_alea();
+            ope = document.getElementsByClassName("ope")[2];
+            ope.innerHTML = int_alea() + " * " + int_alea();
+        }
+
+        function verif_calcul(){
+            res1 = document.getElementById("ope1").value;
+            res = eval(document.getElementsByClassName("ope")[0].innerHTML);
+
+            if (res != res1) {
+                let b = document.getElementsByClassName("correction")[0];
+                let newP = document.createElement('p');
+                newP.textContent = "La bonne réponse était : "+res;
+                b.append(newP);
+            }
+            //
+            res2 = document.getElementById("ope2").value;
+            res = eval(document.getElementsByClassName("ope")[1].innerHTML);
+
+            if (res != res2) {
+                let b = document.getElementsByClassName("correction")[1];
+                let newP = document.createElement('p');
+                newP.textContent = "La bonne réponse était : "+res;
+                b.append(newP);
+            }
+            //
+            res3 = document.getElementById("ope3").value;
+            res = eval(document.getElementsByClassName("ope")[2].innerHTML);
+
+            if (res != res3) {
+                let b = document.getElementsByClassName("correction")[2];
+                let newP = document.createElement('p');
+                newP.textContent = "La bonne réponse était : "+res;
+                b.append(newP);
+            }
+            
+        }
+
+        // Attacher l'événement 'load' au chargement du document
+        document.addEventListener('DOMContentLoaded', function() {
+            afficher_operations();
+        });
+
+        // Fonction pour ajouter un champ de saisie
+        function addInputField() {
+            // Créer un élément de saisie
+            var input = document.createElement('input');
+            input.className = "ope";
+            input.value = int_alea() + " * " + int_alea();
+            
+            // Ajouter l'élément de saisie au conteneur
+            document.querySelector('form').appendChild(input);
+        }
+        // Appeler la fonction pour ajouter le champ de saisie lorsque la page est chargée ou rechargée
+        window.addEventListener('load', addInputField);
+    </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP de JavaScript</title>
+    
+</head>
+<body>
+    <!-- EXERCICE 1 -->
+    <hr>
+    <h1>EXO 1</h1>
+    <h2>Question 1 et 2</h2>
+    <p class="resultat_ici"></p>
+
+    <h2>Question 3</h2>
+    <p class="resultat_ici"></p>
+    
+    <!-- EXERCICE 2 -->
+    <hr>
+    <h1>EXO 2</h1>
+    <h2>Question 1</h2>
+    <p>Test dans la console la fonction somRec(i) : console.log(somRec(5));</p>
+    <h2>Question 2</h2>
+    <p>Test dans la console la fonction somFor(i) : console.log(somRec(5));</p>
+    <h2>Question 3</h2>
+    <button onclick="lancer_saisie()">Lancer Saisie</button>
+
+    <!-- EXERCICE 3 -->
+    <hr>
+    <h1>EXO 3</h1>
+    <h2>Question 1</h2>
+    <button onclick="lancer_exo3()">Lancer exo3 dans console</button>
+
+    <!-- EXERCICE 4 -->
+    <hr>
+    <h1>EXO 4</h1>
+    <a href="multip.html"><button>Aller vers la page de révision</button></a>
+
+    <!-- EXERCICE 5 -->
+    <hr>
+    <h1>EXO 5</h1>
+    <h2>Question 1</h2>
+    <a href="FonCol_p1.html"><button>Aller vers la partie 1</button></a>
+    <h2>Question 2</h2>
+    <a href="FonCol_p2.html"><button>Aller vers la partie 2</button></a>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ..................................................... -->
+    <script>
+        //EXERCICE 1
+        let jour = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
+        let b = document.getElementsByClassName("resultat_ici")[0];
+        let newP = document.createElement('p');
+        newP.textContent = jour.join(" ; ");
+        b.append(newP);
+        // question 3
+        let b2 = document.getElementsByClassName("resultat_ici")[1];
+        let newP2 = document.createElement('p');
+        for (let i = 0; i < jour.length; i++) {
+            newP2.innerHTML += "Jour  "+i+" : " + jour[i]+"</br>";
+        }
+        b2.append(newP2);
+
+        //EXERCICE 2
+
+        function somRec(i){
+            // Vérifier si i n'est pas un nombre entier ou i < 0
+            if (!Number.isInteger(i) || i < 0) {
+                return "Somme indéfinie";
+            }
+            
+            // Cas de base : lorsque i est égal à zéro, la somme est zéro
+            if (i === 0) {
+                return 0;
+            }
+            
+            // Appel récursif avec i-1 et ajout de i à la somme
+            return i + somRec(i - 1);
+        }
+        // ------------------------------------
+        function somFor(i) {
+            // Vérifier si i n'est pas un nombre entier ou i < 0
+            if (!Number.isInteger(i) || i < 0) {
+                return "Somme indéfinie";
+            }
+            
+            var somme = 0;
+            
+            // Utilisation de la boucle for pour ajouter chaque nombre de 1 à i à la somme
+            for (var j = 1; j <= i; j++) {
+                somme += j;
+            }
+            
+            return somme;
+        }
+        // ---------------------------------
+        function lancer_saisie(){
+            // Demander à l'utilisateur d'entrer un entier positif
+            var entreeUtilisateur = prompt("Entrez un entier positif :", "0");
+
+            // Convertir la valeur saisie en entier
+            var valeur = parseInt(entreeUtilisateur);
+
+            // Appeler la fonction somRec avec la valeur saisie
+            var resultat = somRec(valeur);
+            // Appeler la fonction somFor avec la valeur saisie
+            var resultat2 = somFor(valeur);
+
+            // Afficher le résultat
+            console.log("La valeur de somRec(" + valeur + ") est :", resultat);
+            console.log("La valeur de somFor(" + valeur + ") est :", resultat2);
+        }
+
+        //EXERCICE 3
+        function lancer_exo3(){
+            // 1. Afficher le nom du navigateur et sa version
+            var nomNavigateur = navigator.appName;
+            var versionNavigateur = navigator.appVersion;
+            console.log("Nom du navigateur :", nomNavigateur);
+            console.log("Version du navigateur :", versionNavigateur);
+
+            // 2. Afficher le titre du document
+            var titreDocument = document.title;
+            console.log("Titre du document :", titreDocument);
+
+            // 3. Afficher la Date de dernière modification
+            var dateDerniereModification = document.lastModified;
+            console.log("Date de dernière modification :", dateDerniereModification);
+        }
+
+
+    </script>
+</body>
+</html>

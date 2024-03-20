@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TD numero 1 - Javascript</title>
+    <script>
+        //-----------------------------------
+        function saisir_rectangle(){
+            var saisie_largeur = prompt("Veuillez saisir un nombre pour la largeur du rectangle");
+            var saisie_longueur = prompt("Veuillez saisir un nombre pour la longueur du rectangle");
+            calculer_perimetre(saisie_largeur,saisie_longueur);
+        }
+        function calculer_perimetre(largeur,longueur){
+            var perimetre = largeur*2 + longueur*2;
+            alert("le périmetre du rectangle est : " + perimetre);
+        }
+        //-----------------------------------
+        function afficher_perimetre(){
+            var saisie_largeur = prompt("Veuillez saisir un nombre pour la largeur du rectangle");
+            var saisie_longueur = prompt("Veuillez saisir un nombre pour la longueur du rectangle");
+            var perimetre = saisie_largeur*2 + saisie_longueur*2;
+            
+            let b = document.getElementsByClassName("resultat_ici")[0];
+            let newP = document.createElement('p');
+            newP.textContent = "le périmetre du rectangle est : " + perimetre;
+            b.append(newP);
+        }
+        //-----------------------------------
+        function afficher_perimetre2() {
+            let baliseLargueur = document.getElementById("Largeur");
+            let largueur = baliseLargueur.value;
+            
+            let baliseLongueur = document.getElementById("Longueur");
+            let longueur = baliseLongueur.value;
+
+            var perimetre = largueur*2 + longueur*2;
+
+            let b = document.getElementsByClassName("resultat_ici")[1];
+            let newP = document.createElement('p');
+            newP.textContent = "le périmetre du rectangle est : " + perimetre;
+            b.append(newP);
+        }   
+        //-----------------------------------
+        function afficher_nbJour(){
+            //recuperer la saisie utilisateur
+            let baliseMois = document.getElementById("Mois");
+            var mois = baliseMois.value;
+            
+            let baliseAnnee = document.getElementById("Annee");
+            var annee = baliseAnnee.value;
+
+            //traitement
+            if (mois <= 7)
+            {
+                if (mois%2 == 0)
+                {
+                    nbreJour = 30;
+                }
+                else
+                {
+                    nbreJour = 31;
+                }
+            }else{
+                if (mois%2 == 1)
+                {
+                    nbreJour = 30;
+                }
+                else
+                {
+                    nbreJour = 31;
+                }
+            }
+            if(mois==2){
+                if(annee%4==0){
+                    nbreJour = 29;
+                }else{
+                    nbreJour = 28;
+                }
+            }
+            let mois_lib = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre"]
+            //Afficher resultat
+            let b = document.getElementsByClassName("resultat_ici")[2];
+            let newP = document.createElement('p');
+            newP.textContent = "le nombre de jours dans " + mois_lib[mois-1] +" "+ annee +" est : " + nbreJour;
+            b.append(newP);
+        }
+        //-----------------------------------
+        function afficher_nbJour2(){
+            //recuperer la saisie utilisateur
+            let baliseMois = document.getElementById("Mois");
+            var mois = baliseMois.value;
+            
+            let baliseAnnee = document.getElementById("Annee");
+            var annee = baliseAnnee.value;
+
+            //traitement
+            var nbreJour = new Date(annee, mois, 0).getDate();
+
+            let mois_lib = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre"]
+            //Afficher resultat
+            let b = document.getElementsByClassName("resultat_ici")[2];
+            let newP = document.createElement('p');
+            newP.textContent = "le nombre de jours dans " + mois_lib[mois-1] +" "+ annee +" est : " + nbreJour;
+            b.append(newP);
+        }
+        //-----------------------------------
+        function afficher_tableMulti(){
+            let nb = prompt("Veuillez saisir un nombre :");
+            if(nb = nb){
+                let b = document.getElementsByClassName("resultat_ici")[3];
+                b.innerHTML = " -- Table de " + nb + " --" + "<br>";
+                //Afficher le resultat
+                for (let i = 0; i <= 10; i++) {
+                    b.innerHTML += nb + " x " + i + " = " + nb*i + "<br>";
+                }
+            }else{
+                alert("Mauvaise saisie");
+            }
+        }
+        //-----------------------------------
+        function faire_operation(){
+            // Expression régulière pour vérifier si l'expression ne contient que des chiffres, des opérateurs mathématiques et des espaces
+            var expressionValide = /^[0-9+\-*/().\s]+$/;
+
+            //recuperer la saisie utilisateur
+            let baliseCalcul = document.getElementById("calcul");
+            var calcul = baliseCalcul.value;
+
+            //On calcul l'opération
+            if (!expressionValide.test(calcul)) {
+                console.log("Expression invalide !");
+            }
+            else{
+                var result = eval(calcul);
+            }
+
+            //On affiche le résultat
+            var input = document.getElementById("monInput");
+            input.type = "text";
+            input.value = result;
+        }
+        //-----------------------------------
+        function faire_operation2(){
+            //recuperer la saisie utilisateur
+            let baliseCalcul = document.getElementById("calcul");
+            var calcul = baliseCalcul.value;
+
+            try {
+                var result = eval(calcul);
+            } catch (error) {
+                console.log("Expression invalide !");
+            }
+            
+
+            //On affiche le résultat
+            var input = document.getElementById("monInput");
+            input.type = "text";
+            input.value = result;
+        }
+    </script>
+</head>
+<body>
+    <h1>Ecriture de fonctions simples</h1>
+    <button onclick="saisir_rectangle()">Lancer la fonction</button>
+    <button onclick="afficher_perimetre()">Afficher le perimetre</button>
+    <p class="resultat_ici"></p>
+    <hr>
+    <!-- Ajouter depuis un formulaire -->
+    <form>
+        <label for="Largeur">Largeur</label>
+        <input type="number" id="Largeur" name="Largeur" placeholder="La largueur du rectangle" required><br>
+        <label for="Longueur">Longueur</label>
+        <input type="number" id="Longueur" name="Longueur" placeholder="La longueur du rectangle" required><br>
+    </form>
+    <button onclick="afficher_perimetre2()">Afficher le perimetre</button>
+    <p class="resultat_ici"></p>
+    <hr>
+    <!-- Afficher le nombre de jours d'un mois donnee dans une annee -->
+    <form>
+        <label for="Mois">Mois</label>
+        <input type="number" id="Mois" name="Mois" placeholder="Saisir un mois entre 1 et 12" max="12" min="1" required><br>
+        <label for="Annee">Annee</label>
+        <input type="number" id="Annee" name="Annee" placeholder="Saisir une annee" min="0" required><br>
+    </form>
+    <button onclick="afficher_nbJour2()">Afficher le nombre de jours</button>
+    <p class="resultat_ici"></p>
+    <hr>
+    <!-- Afficher la table de multiplication d'un chiffre saisie -->
+    <button onclick="afficher_tableMulti()">Saisir un nombre entre 1 et 10</button>
+    <p class="resultat_ici"></p>
+    <hr>
+    <!-- Saisie opération -->
+    <form>
+        <label for="calcul">Calcul</label>
+        <input type="text" name="calcul" id="calcul">
+        <bouton onclick="faire_operation2()" type="bouton">=</bouton>
+        <input type="hidden" id="monInput" value="valeur cachée">
+    </form>
+</body>
+</html>

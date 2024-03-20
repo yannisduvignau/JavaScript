@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choix de la couleur de fond</title>
+</head>
+<body>
+    <script>
+        // Demander à l'utilisateur de choisir une couleur de fond
+        var choix = prompt("Choisissez une couleur de fond :\n1. Gris\n2. Bleu\n3. Vert");
+
+        // Convertir le choix de l'utilisateur en couleur de fond
+        var couleurFond;
+        switch (choix) {
+            case "1":
+                couleurFond = "#C0C0C0"; // Gris
+                break;
+            case "2":
+                couleurFond = "#669999"; // Bleu
+                break;
+            case "3":
+                couleurFond = "#99FF66"; // Vert
+                break;
+            default:
+                alert("Choix invalide. La couleur de fond par défaut sera blanche.");
+                couleurFond = "#FFFFFF"; // Blanc par défaut
+                break;
+        }
+
+        // Appliquer la couleur de fond au document
+        document.body.style.backgroundColor = couleurFond;
+    </script>
+</body>
+</html>

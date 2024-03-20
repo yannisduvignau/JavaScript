@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recherche d'informations</title>
+<script>
+// Liste inversée des termes et des URIs correspondants
+var listeInversee = {
+    "art": ["D1", "D2"],
+    "plaire": ["D1"],
+    "est": ["D1"],
+    "tromper": ["D1"],
+    "nous": ["D2"],
+    "avons": ["D2"],
+    "afin": ["D2"],
+    "pas": ["D2"],
+    "mourir": ["D2"],
+    "vérité": ["D2"]
+};
+
+// Fonction pour rechercher les URIs correspondant à un terme saisi par l'utilisateur
+function rechercher() {
+    var terme = document.getElementById("terme").value.toLowerCase();
+    var resultat = document.getElementById("resultat");
+    resultat.innerHTML = ""; // Effacer les résultats précédents
+
+    if (listeInversee.hasOwnProperty(terme)) {
+        var uris = listeInversee[terme];
+        uris.forEach(function(uri) {
+            var lien = document.createElement("a");
+            lien.href = uri;
+            lien.target = "_blank"; // Ouvrir dans une nouvelle fenêtre
+            lien.textContent = uri;
+            lien.style.display = "block"; // Afficher chaque lien sur une nouvelle ligne
+            resultat.appendChild(lien);
+        });
+    } else {
+        resultat.textContent = "Aucun résultat trouvé pour ce terme.";
+    }
+}
+</script>
+</head>
+<body>
+
+<h1>Recherche d'informations</h1>
+
+<label for="terme">Terme :</label>
+<input type="text" id="terme">
+<button onclick="rechercher()">Rechercher</button>
+
+<div id="resultat"></div>
+
+</body>
+</html>
